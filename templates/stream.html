@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/static/assets/css/paper-kit.css?v=2.0.1" rel="stylesheet"/>
+  <link href="/static/assets/css/styles.css" rel="stylesheet" />
+
+  <!--   Fonts and icons   -->
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
+  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+  <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='materials-icon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='material-indigo-pink.css') }}">
+    <script type="text/javascript"  charset="utf-8" defer src="{{ url_for('static', filename='material-min.js') }}"></script>
+    <meta content="initial-scale=1, width=device-width shrink-to-fit=yes" name="viewport" />
+    <script type="text/javascript"  charset="utf-8" src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script type="text/javascript"  charset="utf-8" src="{{ url_for('static', filename='jquery.playSound.js') }}"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>DrowsiWiz</title>
+    <script type="text/javascript" charset="utf-8">
+        function stream() {
+          $.ajax({
+              type: 'POST',
+              url:"{{ url_for('start') }}",
+              success: function(data) {
+  
+                document.getElementById("status").innerHTML = data;
+                $('#start_btn').attr("disabled", "disabled");
+                $('#stop_btn').removeAttr("disabled");
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+              })
+          };
+  
+          function stop() {
+          $.ajax({
+              type: 'POST',
+              url:"{{ url_for('stop') }}",
+              success: function(data) {
+  
+                document.getElementById("status").innerHTML = data;
+                $('#stop_btn').attr("disabled", "disabled");
+                $('#start_btn').removeAttr("disabled");
+              },
+              error: function() {
+                  console.log(error);
+              }
+              })
+          };
+
+          
+        </script>
+        <script>
+        function start_cam() {
+          $.ajax({
+              type: 'post',
+              url:"{{ url_for('start') }}",
+              success: function(data) {
+  
+                document.getElementById("status").innerHTML = data;
+              },
+              error: function(data) {
+                alert(JSON.stringify(data.status))
+              }
+              })
+          };
+        </script>
+  <title>DrowsiWiz | Streaming</title>
+</head>
+  <body style="background-color:#34495e;">
+    <nav class="navbar navbar-toggleable-md fixed-top nav-down" >
+      <div class="container">
+        <div class="navbar-translate">
+          <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar"></span>
+            <span class="navbar-toggler-bar"></span>
+            <span class="navbar-toggler-bar"></span>
+          </button>
+          <div class="navbar-header">
+            <a class="customfont" style="font-size:3rem;color:#66615B;font-weight:400;" href="#">DrowsiWiz</a>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/#contacust-" data-scroll="true">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-round btn-danger" href="/stream"><i class="fa fa-car"></i> Stream Now</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="cd-section" id="headers">
+
+      <div class="header-3 header-4">
+  
+        <div class="page-carousel">
+          <div class="filter"></div>
+          <div class="content-center state-play">
+            <div class="container upper-container text-center " >
+              <h1 style="color:#b3e5fc;font-weight:250;margin-top: 50px;">Streaming Video</h1>
+              <div id='controls'>
+                <button id='start_btn' class="btn btn-round btn-danger" style="background-color: green;border-color: green;"type="submit"  onclick="start_cam()">START</button>
+                <button id='stop_btn' class="btn btn-round btn-danger" style="margin-left: 5px;" type="submit" onclick="stop()">STOP</button>
+               </div>
+              <div class="col s12">
+                <img style="width:39vw;" id="video" src="{{ url_for('video_feed') }}">
+              </div>
+        </div>
+      </div>
+  
+    </div>
+      <div class="col s12" style="max-height:70vh;overflow:auto" id="listed">
+      </div>
+
+    </div>
+    <footer class="footer section-dark">
+      <div class="container" style="font-size:1.2rem;">
+          <div class="row">
+              <nav class="footer-nav">
+                  <ul>
+                      <li><a href="#">DrowsiWiz</a></li>
+                      <li><a href="\#contact_us">Contact Us</a></li>
+                  </ul>
+              </nav>
+              <div class="credits ml-auto">
+                  <span class="copyright">
+                      © DrowsiWiz 2020, made with <i class="fa fa-heart heart"></i> by <a href="http://digitalprojekt.co">BSS TEAM</a>
+                  </span>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+    
+</body>
+</html>
+
+  
