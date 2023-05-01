@@ -1,4 +1,4 @@
-Flask==1.1.2
+Flask==2.3.2
 gTTS==2.1.1
 opencv-python==4.2.0.34
 PyFladesk==1.1
